@@ -1,4 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { useAuthStore, useAlertStore } from '@/stores';
+
 
 export const routes = [
     {
@@ -37,7 +39,7 @@ export const routes = [
         path: "/account/add",
         name: "add_user",
         meta: {
-            title: "Add user",
+            title: "Add",
         },
         component: () => import("@/page/AddUserPage.vue")
     },
@@ -45,18 +47,35 @@ export const routes = [
         path: "/account/edit",
         name: "edit_user",
         meta: {
-            title: "Edit user",
+            title: "Edit",
         },
         component: () => import("@/page/EditUserPage.vue")
     },
+    { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
-const router = createRouter({
-    history: createWebHashHistory(),
-    routes,
-    scrollBehavior(to, from, savedPosition) {
-        return savedPosition || { top: 0 };
-    },
+
+
+export const router = createRouter({
+    history: createWebHashHistory(import.meta.env.BASE_URL),
+    linkActiveClass: 'active',
+    routes
+});
+
+router.beforeEach(async (to) => {
+    // clear alert on route change
+    const alertStore = useAlertStore();
+    alertStore.clear();
+
+    // redirect to login page if not logged in and trying to access a restricted page 
+    const publicPages = ['/account/login', '/account/register'];
+    const authRequired = !publicPages.includes(to.path);
+    const authStore = useAuthStore();
+
+    if (authRequired && !authStore.user) {
+        authStore.returnUrl = to.fullPath;
+        return '/account/login';
+    }
 });
 
 
