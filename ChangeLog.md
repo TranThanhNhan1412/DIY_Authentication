@@ -1,5 +1,12 @@
 # Authentication
 
+## v.0.1 -
+
+### feat
+
++ Login page interface
+
+
 ## v.0.0 - init layout: 15/8/2023
 
 ### feat
