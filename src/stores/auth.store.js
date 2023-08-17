@@ -15,9 +15,9 @@ export const useAuthStore = defineStore({
     }),
     actions: {
         async login(username, password) {
+            console.log("login: ",username, password);
             try {
                 const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });    
-
                 // update pinia state
                 this.user = user;
 
@@ -32,8 +32,9 @@ export const useAuthStore = defineStore({
             }
         },
         logout() {
+            console.log("logout");
             this.user = null;
-            localStorage.removeItem('user');
+            localStorage.removeItem('user', JSON.stringify(user));
             router.push('/account/login');
         }
     }

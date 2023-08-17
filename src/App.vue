@@ -2,10 +2,13 @@
 import { RouterView } from "vue-router";
 import SideBar from "@/components/SideBar.vue";
 import NavBar from "@/components/NavBar.vue";
+import Alert from "@/components/Alert.vue";
 
 </script>
 
 <template>
+  <Alert />
+
   <div class="grid grid-cols-5 h-screen w-screen">
     <div class="hidden md:block h-screen bg-slate-950 text-slate-50">
       <div class="text-center text-lg p-3">

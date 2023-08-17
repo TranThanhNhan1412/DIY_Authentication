@@ -1,24 +1,25 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-
+import { useAuthStore } from '@/stores';
 const username = ref("");
 const isUsernameInvlid = ref(false);
 const password = ref("");
 const isPasswordInvlid = ref(false);
 
-function login() {
+async function login() {
     if (!username.value) {
         isUsernameInvlid.value = true;
     }
     if (!password.value) {
         isPasswordInvlid.value = true;
     }
-    if (!(isUsernameInvlid.value & isPasswordInvlid.value)) {
-        console.log(username.value, password.value);
+    if (!(isUsernameInvlid.value | isPasswordInvlid.value)) {
+        const authStore = useAuthStore();
+        await authStore.login(username.value, password.value);
     }
-
 }
+
 </script>
 <template>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm h-full">
@@ -27,7 +28,7 @@ function login() {
         </div>
         <div class="space-y-6" action="#" method="POST">
             <div>
-                <label for="user_name" class="block text-sm font-medium leading-6 text-gray-900">
+                <label for="user_name" class="relative block text-sm font-medium leading-6 text-gray-900">
                     Name
                     <span
                         :class="isUsernameInvlid ? 'visible text-lg  text-center text-red-500 absolute -top-1' : 'hidden'">*</span>
@@ -36,7 +37,7 @@ function login() {
                     <input v-model="username" @change="isUsernameInvlid = false" id="user_name" name="user_name" type="text"
                         autocomplete="user_name" required :class="{ 'border border-red-500': isUsernameInvlid }"
                         class="
-                        block w-full rounded-md border-0 py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        block w-full rounded-md  py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
 
@@ -53,9 +54,10 @@ function login() {
                     </div>
                 </div>
                 <div class="mt-2">
-                    <input v-model="password" @change="isPasswordInvlid = false" id="password" name="password" type="password"
-                        autocomplete="current-password" required :class="{ 'border border-red-500': isPasswordInvlid }"
-                        class="block w-full rounded-md border-0 py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input v-model="password" @change="isPasswordInvlid = false" id="password" name="password"
+                        type="password" autocomplete="current-password" required
+                        :class="{ 'border border-red-500': isPasswordInvlid }"
+                        class="block w-full rounded-md  py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
 
