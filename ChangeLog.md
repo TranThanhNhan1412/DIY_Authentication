@@ -5,7 +5,8 @@
 ### feat
 
 + Login page interface
-
++ Register interface
++ Home interface <=> List.vue in tutorial
 
 ## v.0.0 - init layout: 15/8/2023
 
