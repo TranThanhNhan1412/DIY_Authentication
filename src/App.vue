@@ -10,12 +10,9 @@ import Alert from "@/components/Alert.vue";
   <Alert />
 
   <div class="grid grid-cols-5 h-screen w-screen">
-    <div class="hidden md:block h-screen bg-slate-950 text-slate-50">
-      <div class="text-center text-lg p-3">
-        sidebar
-      </div>
-      <SideBar />
-    </div>
+    
+    <SideBar />
+
     <div class="col-span-5 md:col-span-4 flex flex-col w-full h-full bg-blue-100">
       <div class="w-screen  h-16 bg-slate-950 text-slate-50 p-3 text-md">
         <NavBar />

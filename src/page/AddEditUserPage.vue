@@ -76,7 +76,6 @@ async function addUser() {
         let message;
 
         if (id != undefined) {
-            console.log("user", user, user.value.id);
             await usersStore.update(user.value.id, formData)
             message = 'User updated';
         } else {
