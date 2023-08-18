@@ -11,7 +11,7 @@ watch(alert, () => {
     if (alert) {
         setTimeout(() => {
             alertStore.clear()
-        }, 2000);
+        }, 2500);
     }
 })
 </script>
@@ -38,18 +38,19 @@ watch(alert, () => {
 
 .animate-bounce-alert {
     animation: bounce 1.5s infinite;
+}
 
-    @keyframes bounce {
+@keyframes bounce {
 
-        0%,
-        100% {
-            transform: translateY(-25%);
-            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
-
-        50% {
-            transform: translateY(0);
-            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     }
-}</style>
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+</style>

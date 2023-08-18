@@ -28,30 +28,32 @@ export const routes = [
         component: () => import("@/page/RegisterPage.vue")
     },
     {
-        path: "/account/user",
-        name: "user",
+        path: "/users/add_edit",
+        name: "add_edit_user",
         meta: {
-            title: "User",
+            title: "Add/Edit",
         },
-        component: () => import("@/page/UserPage.vue")
+        children: [
+            {
+                path: "add",
+                meta: {
+                    title: "Add New User",
+                },
+                name: 'add',
+                component: () => import("@/page/AddEditUserPage.vue")
+            },
+            {
+                path: "edit/:id",
+                name: 'edit',
+                meta: {
+                    title: "Edit User",
+                },
+                component: () => import("@/page/AddEditUserPage.vue")
+            }
+        ],
+
     },
-    {
-        path: "/account/add",
-        name: "add_user",
-        meta: {
-            title: "Add",
-        },
-        component: () => import("@/page/AddUserPage.vue")
-    },
-    {
-        path: "/account/edit",
-        name: "edit_user",
-        meta: {
-            title: "Edit",
-        },
-        component: () => import("@/page/EditUserPage.vue")
-    },
-    { path: '/:pathMatch(.*)*', redirect: '/' }
+    // { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
 

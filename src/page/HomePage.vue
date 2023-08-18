@@ -7,6 +7,7 @@ const usersStore = useUsersStore();
 const { users } = storeToRefs(usersStore);
 
 usersStore.getAll();
+
 const user = JSON.parse(localStorage.getItem("user"));
 
 </script>
@@ -17,13 +18,12 @@ const user = JSON.parse(localStorage.getItem("user"));
             <div class="text-xl">
                 Welcome - {{ user.lastName }} {{ user.firstName }}({{ user.username }})
             </div>
-            <RouterLink to="/account/add" class="px-3 py-2 border bg-blue-300 rounded-lg float-right">
+            <RouterLink to="/users/add_edit/add" class="px-3 py-2 border bg-blue-300 rounded-lg float-right">
                 Add User
             </RouterLink>
         </div>
         <hr class="h-[2px] bg-slate-300">
         <div>
-
             <table class="table-auto w-full">
                 <thead>
                     <tr>
@@ -37,13 +37,14 @@ const user = JSON.parse(localStorage.getItem("user"));
                 <tbody>
                     <template v-if="users.length">
 
-                        <tr v-for="userItem in usersStore.users" :class="{ 'font-semibold': userItem.id === user.id }">
+                        <tr v-for="userItem in usersStore.users"
+                            :class="{ 'font-semibold bg-blue-200 ': userItem.id === user.id }">
                             <td class="border border-slate-300 p-1">{{ userItem.id }}</td>
                             <td class="border border-slate-300 p-1">{{ userItem.firstName }}</td>
                             <td class="border border-slate-300 p-1">{{ userItem.lastName }}</td>
                             <td class="border border-slate-300 p-1">{{ userItem.username }}</td>
                             <td class="border border-slate-300 p-1">
-                                <RouterLink :to="`/users/edit/${user.id}`"
+                                <RouterLink :to="`/users/add_edit/edit/${userItem.id}`"
                                     class="px-3 py-2 border bg-blue-300 rounded-lg  mr-3">
                                     Edit
                                 </RouterLink>

@@ -23,16 +23,10 @@ export const useUsersStore = defineStore({
                 this.users = { error };
             }
         },
-        async getById(id) {
-            this.user = { loading: true };
-            try {
-                this.user = await fetchWrapper.get(`${baseUrl}/${id}`);
-            } catch (error) {
-                this.user = { error };
-            }
-        },
+        
         async update(id, params) {
-            await fetchWrapper.put(`${baseUrl}/${id}`, params);
+            console.log(`${baseUrl}/users/${id}`);
+            await fetchWrapper.put(`${baseUrl}/users/${id}`, params);
 
             // update stored user if the logged in user updated their own record
             const authStore = useAuthStore();

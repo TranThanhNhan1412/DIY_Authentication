@@ -44,7 +44,6 @@ async function register() {
 }
 </script>
 <template>
-    {{ formData }}
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm h-full">
         <div class="text-center text-xl">
             Register
